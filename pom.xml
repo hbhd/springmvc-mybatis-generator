@@ -22,7 +22,7 @@
     </properties>
 
     <modules>
-        <module>mybatis-generator</module>
+        <module>mybatis-generator-core</module>
         <module>mybatis-generator-maven-plugin</module>
     </modules>
 

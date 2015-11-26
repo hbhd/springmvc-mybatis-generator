@@ -11,7 +11,7 @@
     </parent>
 
 
-    <artifactId>mybatis-generator</artifactId>
+    <artifactId>mybatis-generator-core</artifactId>
     <packaging>jar</packaging>
     <name>Mybatis Generator Core</name>
     <dependencies>
