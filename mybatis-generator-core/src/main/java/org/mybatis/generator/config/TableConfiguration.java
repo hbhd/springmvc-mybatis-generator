@@ -69,6 +69,11 @@ public class TableConfiguration extends PropertyHolder {
     /** The generated key. */
     private GeneratedKey generatedKey;
 
+	/**
+	 * The select sql.
+	 */
+	private List<SelectSql> selectSqls;
+
     /** The select by primary key query id. */
     private String selectByPrimaryKeyQueryId;
 
@@ -126,8 +131,9 @@ public class TableConfiguration extends PropertyHolder {
 
         columnOverrides = new ArrayList<ColumnOverride>();
         ignoredColumns = new HashMap<IgnoredColumn, Boolean>();
+		selectSqls = new ArrayList<SelectSql>();
 
-        insertStatementEnabled = true;
+		insertStatementEnabled = true;
         selectByPrimaryKeyStatementEnabled = true;
         selectByExampleStatementEnabled = true;
         updateByPrimaryKeyStatementEnabled = true;
@@ -842,6 +848,10 @@ public class TableConfiguration extends PropertyHolder {
             columnOverride.validate(errors, fqTableName);
         }
 
+		for(SelectSql selectSql:selectSqls){
+			selectSql.validate(errors,fqTableName);
+		}
+
         for (IgnoredColumn ignoredColumn : ignoredColumns.keySet()) {
             ignoredColumn.validate(errors, fqTableName);
         }
@@ -885,4 +895,13 @@ public class TableConfiguration extends PropertyHolder {
             boolean isAllColumnDelimitingEnabled) {
         this.isAllColumnDelimitingEnabled = isAllColumnDelimitingEnabled;
     }
+
+	public List<SelectSql> getSelectSqls() {
+		return selectSqls;
+	}
+
+	public void addSelectSql(SelectSql selectSql) {
+		this.selectSqls.add(selectSql);
+	}
+
 }

@@ -466,4 +466,8 @@ public abstract class BaseRules implements Rules {
     public boolean generateJavaClient() {
         return !isModelOnly;
     }
+
+	public boolean generateSelectWithSql(){
+		return introspectedTable.getSelectSqls().size()>0;
+	}
 }

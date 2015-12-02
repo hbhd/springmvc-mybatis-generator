@@ -343,11 +343,25 @@ public class MyBatisGeneratorConfigurationParser {
                 parseGeneratedKey(tc, childNode);
             } else if ("columnRenamingRule".equals(childNode.getNodeName())) { //$NON-NLS-1$
                 parseColumnRenamingRule(tc, childNode);
-            }
-        }
+            } else if ("selectSql".equals(childNode.getNodeName())) { // generator sql
+				parseSelectSql(tc,childNode);
+			}
+		}
     }
 
-    private void parseColumnOverride(TableConfiguration tc, Node node) {
+	private void parseSelectSql(TableConfiguration tc, Node node) {
+		Properties attributes = parseAttributes(node);
+
+		String name = attributes.getProperty("name");
+		String sql = attributes.getProperty("sql"); //$NON-NLS-1$
+		String returnType = attributes.getProperty("returnType"); //$NON-NLS-1$
+
+		SelectSql selectSql = new SelectSql(name, sql, returnType);
+
+		tc.addSelectSql(selectSql);
+	}
+
+	private void parseColumnOverride(TableConfiguration tc, Node node) {
         Properties attributes = parseAttributes(node);
         String column = attributes.getProperty("column"); //$NON-NLS-1$
         String property = attributes.getProperty("property"); //$NON-NLS-1$

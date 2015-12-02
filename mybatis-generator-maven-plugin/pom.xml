@@ -91,7 +91,7 @@
         </dependency>
         <dependency>
             <groupId>com.hdup.code.common</groupId>
-            <artifactId>mybatis-generator</artifactId>
+            <artifactId>mybatis-generator-core</artifactId>
             <version>${project.version}</version>
         </dependency>
     </dependencies>

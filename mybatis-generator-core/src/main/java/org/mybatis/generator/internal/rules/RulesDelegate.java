@@ -172,4 +172,9 @@ public class RulesDelegate implements Rules {
     public boolean generateJavaClient() {
         return rules.generateJavaClient();
     }
+
+	@Override
+	public boolean generateSelectWithSql() {
+		return rules.generateSelectWithSql();
+	}
 }

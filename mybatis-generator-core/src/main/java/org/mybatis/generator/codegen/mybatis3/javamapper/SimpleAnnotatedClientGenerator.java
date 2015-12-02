@@ -19,11 +19,8 @@ package org.mybatis.generator.codegen.mybatis3.javamapper;
 import org.mybatis.generator.api.dom.java.Interface;
 import org.mybatis.generator.codegen.AbstractXmlGenerator;
 import org.mybatis.generator.codegen.mybatis3.javamapper.elements.AbstractJavaMapperMethodGenerator;
-import org.mybatis.generator.codegen.mybatis3.javamapper.elements.annotated.AnnotatedDeleteByPrimaryKeyMethodGenerator;
-import org.mybatis.generator.codegen.mybatis3.javamapper.elements.annotated.AnnotatedInsertMethodGenerator;
-import org.mybatis.generator.codegen.mybatis3.javamapper.elements.annotated.AnnotatedSelectAllMethodGenerator;
-import org.mybatis.generator.codegen.mybatis3.javamapper.elements.annotated.AnnotatedSelectByPrimaryKeyMethodGenerator;
-import org.mybatis.generator.codegen.mybatis3.javamapper.elements.annotated.AnnotatedUpdateByPrimaryKeyWithoutBLOBsMethodGenerator;
+import org.mybatis.generator.codegen.mybatis3.javamapper.elements.annotated.*;
+import org.mybatis.generator.config.SelectSql;
 
 /**
  * @author Jeff Butler
@@ -54,7 +51,17 @@ public class SimpleAnnotatedClientGenerator extends SimpleJavaClientGenerator {
         }
     }
 
-    @Override
+	@Override
+	protected void addSelectSqlMethod(Interface interfaze) {
+		if(introspectedTable.getRules().generateSelectWithSql()){
+			for (SelectSql selectSql : introspectedTable.getSelectSqls()) {
+				AbstractJavaMapperMethodGenerator methodGenerator = new AnnotatedSelectSqlMethodGenerator(selectSql);
+				initializeAndExecuteGenerator(methodGenerator, interfaze);
+			}
+		}
+	}
+
+	@Override
     protected void addSelectByPrimaryKeyMethod(Interface interfaze) {
         if (introspectedTable.getRules().generateSelectByPrimaryKey()) {
             AbstractJavaMapperMethodGenerator methodGenerator = new AnnotatedSelectByPrimaryKeyMethodGenerator(false, true);

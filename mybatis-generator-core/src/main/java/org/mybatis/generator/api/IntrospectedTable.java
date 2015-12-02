@@ -44,8 +44,8 @@ public abstract class IntrospectedTable {
         
         /** The IBATI s2. */
         IBATIS2, 
- /** The MYBATI s3. */
- MYBATIS3
+ 		/** The MYBATI s3. */
+ 		MYBATIS3
     }
 
     /**
@@ -250,7 +250,15 @@ public abstract class IntrospectedTable {
         return tableConfiguration.getGeneratedKey();
     }
 
-    /**
+	/**
+	 * Gets the select sql.
+	 * @return the select sql
+	 */
+	public List<SelectSql> getSelectSqls() {
+		return tableConfiguration.getSelectSqls();
+	}
+
+	/**
      * Gets the column.
      *
      * @param columnName
