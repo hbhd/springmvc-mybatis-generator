@@ -22,6 +22,7 @@ public class SelectSql {
 	 */
 	private String returnType;
 
+
 	public SelectSql(String name, String sql, String returnType) {
 		this.name = name;
 		this.sql = sql;
